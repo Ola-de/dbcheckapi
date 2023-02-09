@@ -1,5 +1,5 @@
 const allowedOrigings = [
-    'https://dbcheck.onrender.com'
+    'https://dbcheck-api.onrender.com'
 ]
 
 module.exports = allowedOrigings;
