@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {login, refresh, logout} = require('../controller/authController')
-const loginLimiter = require('../midddleWear/loginLimiter')
+const loginLimiter = require('../middleWear/loginLimiter')
 
 router.route('/')
             .post(loginLimiter, login)

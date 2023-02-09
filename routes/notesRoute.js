@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const verifyJWT = require('../middleWear/verifyJWT')
 const {
     getAllNotes,
     createNewNote,
     updateNote,
     deleteNote
 } = require('../controller/noteController')
-const verifyJWT = require('../midddleWear/verifyJwt')
 
 router.use(verifyJWT)
 

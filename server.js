@@ -1,13 +1,14 @@
 require('dotenv').config()
 require('express-async-errors')
+require('./middleWear/verifyJWT')
 const express = require('express')
 const path = require('path')
 const app = express()
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const {logEvents, logger} = require('./midddleWear/logger')
-const errorHandler = require('./midddleWear/errorHandler')
+const {logEvents, logger} = require('./middleWear/logger')
+const errorHandler = require('./middleWear/errorHandler')
 const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbCheck')
 
@@ -25,6 +26,7 @@ app.use('/', express.static(path.join(__dirname, '/public')))
 
 app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/authRoute'))
+
 app.use('/users', require('./routes/usersRoute'))
 app.use('/notes', require('./routes/notesRoute'))
 

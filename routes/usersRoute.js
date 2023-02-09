@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const verifyJWT = require('../middleWear/verifyJWT')
 const {
     getAllUsers,
     createUser,
     updateUser,
     deleteUser
 } = require('../controller/userController')
-const verifyJWT = require('../midddleWear/verifyJwt')
+
 
 router.use(verifyJWT)
 
