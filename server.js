@@ -18,7 +18,6 @@ connectDB()
 
 app.use(logger)
 
-
 app.use(cors(corsOptions))
 
 app.use(express.json())
@@ -29,8 +28,8 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/authRoute'))
-app.use('/users', require('./routes/userRoute'))
-app.use('/notes', require('./routes/noteRoute'))
+app.use('/users', require('./routes/usersRoute'))
+app.use('/notes', require('./routes/notesRoute'))
 
 app.all('*', (req, res) => {
     res.status(404)
