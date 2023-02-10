@@ -1,5 +1,5 @@
 const allowedOrigings = [
-    'https://dbcheck.onrender.com',
+    'https://dbcheck-api.onrender.com',
     // 'http://localhost:3000',
 ]
 
