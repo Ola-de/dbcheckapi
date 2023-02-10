@@ -9,24 +9,27 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const {logEvents, logger} = require('./middleWear/logger')
 const errorHandler = require('./middleWear/errorHandler')
-const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbCheck')
 
 const PORT = process.env.PORT || 3500
 
 connectDB()
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://dbcheck.onrender.com")
-    res.header(
-        "Access-Control-Allow-Headers","https://dbcheck.onrender.com",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Requested-"
-        )
-    next()
+app.use(logger)
+
+app.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Credentials', true)
+    res.header('Access-Control-Allow-Origin', 'https://dbcheck.onrender.com');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE', 'HEAD');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization', 'X-Requested-With', 'Accept');
+    next();
 })
 
-app.use(logger)
-app.use(cors(corsOptions))
+app.use(cors({
+    allowedHeaders: ['Authorization', 'X-Requested-With', 'Content-Type', 'Accept'],
+    allowMethods:['GET','POST','PUT','PATCH','DELETE','HEAD'],
+    origin:'https://dbcheck.onrender.com'
+}))
 
 app.use(express.json())
 app.use(cookieParser())
