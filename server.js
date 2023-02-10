@@ -17,18 +17,20 @@ connectDB()
 
 app.use(logger)
 
-app.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Credentials', true)
-    res.header('Access-Control-Allow-Origin', 'https://dbcheck.onrender.com');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE', 'HEAD');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization', 'X-Requested-With', 'Accept');
-    next();
-})
+// app.use((req,res,next)=>{
+//     res.header('Access-Control-Allow-Credentials', true)
+//     res.header('Access-Control-Allow-Origin', 'https://dbcheck.onrender.com');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE', 'HEAD');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization', 'X-Requested-With', 'Accept');
+//     next();
+// })
 
 app.use(cors({
     allowedHeaders: ['Authorization', 'X-Requested-With', 'Content-Type', 'Accept'],
     allowMethods:['GET','POST','PUT','PATCH','DELETE','HEAD'],
-    origin:'https://dbcheck.onrender.com'
+    origin:'https://dbcheck.onrender.com',
+    credentials: true,
+    optionsSuccessStatus: 200
 }))
 
 app.use(express.json())
