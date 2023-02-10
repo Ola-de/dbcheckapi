@@ -9,7 +9,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const {logEvents, logger} = require('./middleWear/logger')
 const errorHandler = require('./middleWear/errorHandler')
-// const corsOptions = require('./config/corsOptions')
+const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbCheck')
 
 const PORT = process.env.PORT || 3500
@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3500
 connectDB()
 
 app.use(logger)
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 app.use(express.json())
 app.use(cookieParser())
