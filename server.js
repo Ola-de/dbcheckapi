@@ -5,7 +5,7 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
+// const cors = require('cors')
 const mongoose = require('mongoose')
 const {logEvents, logger} = require('./middleWear/logger')
 const errorHandler = require('./middleWear/errorHandler')
@@ -17,7 +17,7 @@ connectDB()
 
 app.use(logger)
 
-app.use(cors())
+// app.use(cors())
 
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Credentials', true)
