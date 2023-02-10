@@ -1,13 +1,7 @@
 const allowedOrigings = require("./allowedOrigins");
 
 const corsOptions = {
-    origin: (origin, callback) => {
-        if (allowedOrigings.indexOf(origin) !== -1 || !origin) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    },
+    origin: 'https://dbcheck-api.onrender.com',
     credentials: true,
     optionsSuccessStatus: 200
 }
