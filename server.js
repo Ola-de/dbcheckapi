@@ -5,9 +5,10 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const cookieParser = require('cookie-parser')
-// const cors = require('cors')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const {logEvents, logger} = require('./middleWear/logger')
+const corsOptions = require('./config/corsOptions')
 const errorHandler = require('./middleWear/errorHandler')
 const connectDB = require('./config/dbCheck')
 
@@ -17,35 +18,28 @@ connectDB()
 
 app.use(logger)
 
-// app.use(cors())
 
-app.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Credentials', true)
-    res.header('Access-Control-Allow-Origin', 'https://dbcheck-api.onrender.com');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE', 'HEAD');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization', 'X-Requested-With', 'Accept');
-    next();
-})
+app.use(cors(corsOptions))
 
 app.use(express.json())
+
 app.use(cookieParser())
 
-app.use('/', express.static(path.join(__dirname, '/public')))
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/authRoute'))
-
-app.use('/users', require('./routes/usersRoute'))
-app.use('/notes', require('./routes/notesRoute'))
+app.use('/users', require('./routes/userRoute'))
+app.use('/notes', require('./routes/noteRoute'))
 
 app.all('*', (req, res) => {
     res.status(404)
-    if(req.accepts('html')){
+    if (req.accepts('html')) {
         res.sendFile(path.join(__dirname, 'views', '404.html'))
-    }else if(req.accepts('json')){
-        res.json({message: 'Resources not found 400'})
-    }else{
-        res.type('txt').send('40 not found')
+    } else if (req.accepts('json')) {
+        res.json({ message: '404 Not Found' })
+    } else {
+        res.type('txt').send('Resources Not Found 404!!')
     }
 })
 

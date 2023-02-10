@@ -1,6 +1,5 @@
-const allowedOrigings = [
-    'https://dbcheck-api.onrender.com',
-    // 'http://localhost:3000',
+const allowedOrigins = [
+    'https://technotes.onrender.com'
 ]
 
-module.exports = allowedOrigings;
+module.exports = allowedOrigins
