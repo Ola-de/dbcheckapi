@@ -75,7 +75,11 @@ const updateNote = async (req, res) => {
 
     const updatedNote = await note.save()
 
-    res.json(`'${updatedNote.title}' updated`)
+    res.status(200).json({
+        success: true,
+        message: 'Updated note',
+        updatedNote
+    })
 }
 
 

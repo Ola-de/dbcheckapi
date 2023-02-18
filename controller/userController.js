@@ -12,7 +12,13 @@ const getAllUsers = async (req, res) => {
         return res.status(400).json({ message: 'No users found' })
     }
 
-    res.json(user)
+    const userCount = user.length
+
+    res.status(200).json({
+        message: "Users found",
+        user,
+        userCount
+    })
 }
 
 const createUser = async (req, res) => {
@@ -50,7 +56,9 @@ const updateUser = async (req, res) => {
 
     // Confirm data 
     if (!id || !username || !Array.isArray(role) || !role.length || typeof active !== 'boolean') {
-        return res.status(400).json({ message: 'All fields except password are required' })
+        return res.status(400).json({ 
+            message: 'All fields except password are required' 
+        })
     }
 
     // Does the user exist to update?
